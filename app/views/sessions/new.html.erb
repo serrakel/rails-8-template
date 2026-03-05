@@ -1,0 +1,49 @@
+<% content_for :title, "Sign In" %>
+
+<div class="auth-container">
+  <div class="auth-card">
+    <h1>Sign In</h1>
+    <p class="auth-subtitle">Welcome back to your reading tracker</p>
+
+    <form action="/session" method="post" class="book-form">
+      <div class="form-group">
+        <label for="email_field">Email</label>
+        <input
+          id="email_field"
+          type="email"
+          name="email_address"
+          required
+          autofocus
+          autocomplete="username"
+          placeholder="you@example.com"
+          value="<%= params.fetch("email_address", "") %>"
+          class="form-control"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="password_field">Password</label>
+        <input
+          id="password_field"
+          type="password"
+          name="password"
+          required
+          autocomplete="current-password"
+          placeholder="Your password"
+          maxlength="72"
+          class="form-control"
+        >
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary btn-lg btn-full">
+          Sign In
+        </button>
+      </div>
+    </form>
+
+    <p class="auth-footer">
+      <a href="/passwords/new">Forgot password?</a>
+    </p>
+  </div>
+</div>
