@@ -1,0 +1,38 @@
+<h1>Create an account</h1>
+
+<form action="/users" method="post">
+  <div>
+    <label for="email_field">Email</label>
+    <input
+      id="email_field"
+      type="email"
+      name="email"
+      required
+      autocomplete="email"
+    >
+  </div>
+
+  <div>
+    <label for="password_field">Password</label>
+    <input
+      id="password_field"
+      type="password"
+      name="password"
+      required
+    >
+  </div>
+
+  <div>
+    <label for="password_confirmation_field">Confirm password</label>
+    <input
+      id="password_confirmation_field"
+      type="password"
+      name="password_confirmation"
+      required
+    >
+  </div>
+
+  <button type="submit">
+    Sign up
+  </button>
+</form>

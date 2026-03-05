@@ -6,25 +6,14 @@
 #  category              :string
 #  date_read             :date
 #  disliked_aspects      :text
-#  is_favorite           :boolean          default(FALSE)
+#  is_favorite           :boolean
 #  liked_aspects         :text
 #  rating                :integer
 #  reddit_discussion_url :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  book_id               :bigint
-#  user_id               :bigint
-#
-# Indexes
-#
-#  index_user_books_on_book_id              (book_id)
-#  index_user_books_on_user_id              (user_id)
-#  index_user_books_on_user_id_and_book_id  (user_id,book_id) UNIQUE
-#
-# Foreign Keys
-#
-#  fk_rails_...  (book_id => books.id)
-#  fk_rails_...  (user_id => users.id)
+#  book_id               :integer
+#  user_id               :integer
 #
 class UserBook < ApplicationRecord
   belongs_to :user

@@ -6,16 +6,16 @@ class PasswordsController < ApplicationController
   end
 
   def create
-    email = params.fetch("email_address")
+    email = params.fetch("email")
 
-    matching_users = User.where({ :email_address => email })
+    matching_users = User.where({ :email => email })
     user = matching_users.at(0)
 
     if user != nil
       PasswordsMailer.reset(user).deliver_later
     end
 
-    redirect_to("/session/new")
+    render({ :template => "passwords/email_sent" })
   end
 
   def edit

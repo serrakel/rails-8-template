@@ -7,8 +7,13 @@ Rails.application.routes.draw do
   post("/session", { :controller => "sessions", :action => "create" })
   get("/session/destroy", { :controller => "sessions", :action => "destroy" })
 
+  # Signup
+get("/users/new", { :controller => "users", :action => "new" })
+post("/users",     { :controller => "users", :action => "create" })
+
   # Password reset (token-based)
   get("/passwords/new", { :controller => "passwords", :action => "new" })
+   get("/passwords", { :controller => "passwords", :action => "new" })
   post("/passwords", { :controller => "passwords", :action => "create" })
   get("/passwords/:token/edit", { :controller => "passwords", :action => "edit" })
   post("/passwords/:token", { :controller => "passwords", :action => "update" })

@@ -1,0 +1,22 @@
+<h1>Forgot your password?</h1>
+
+<% if flash[:alert].present? %>
+  <div style="color: red;"><%= flash[:alert] %></div>
+<% end %>
+
+<form action="/passwords" method="post">
+  <input
+    type="email"
+    name="email"
+    required
+    autofocus
+    autocomplete="username"
+    placeholder="Enter your email address"
+    value="<%= params.fetch("email_address", "") %>"
+  >
+  <br>
+
+  <button type="submit">
+    Email reset instructions
+  </button>
+</form>

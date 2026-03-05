@@ -24,5 +24,5 @@ class User < ApplicationRecord
   has_many :books, through: :user_books
   has_many :recommendations, dependent: :destroy
 
-  normalizes :email_address, with: ->(e) { e.strip.downcase }
+ validates(:email, { :presence => true, :uniqueness => true })
 end

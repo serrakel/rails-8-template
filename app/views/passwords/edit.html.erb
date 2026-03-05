@@ -1,0 +1,27 @@
+<h1>Reset your password</h1>
+
+<form action="/passwords/<%= params.fetch("token") %>" method="post">
+  <div>
+    <label for="password_field">New password</label>
+    <input
+      id="password_field"
+      type="password"
+      name="password"
+      required
+    >
+  </div>
+
+  <div>
+    <label for="password_confirmation_field">Confirm new password</label>
+    <input
+      id="password_confirmation_field"
+      type="password"
+      name="password_confirmation"
+      required
+    >
+  </div>
+
+  <button type="submit">
+    Reset password
+  </button>
+</form>

@@ -1,0 +1,126 @@
+<% action_url =
+     if @user_book.id == nil
+       "/user_books"
+     else
+       "/user_books/" + @user_book.id.to_s + "/update"
+     end %>
+
+<form action="<%= action_url %>" method="post" class="book-form">
+  <fieldset class="form-section">
+    <legend>Book Details</legend>
+
+    <div class="form-group">
+      <label for="book_field">Book</label>
+      <select id="book_field" name="query_book_id" class="form-control" required>
+        <% Book.all.each do |book| %>
+          <% selected = (@user_book.book_id == book.id) ? "selected" : "" %>
+          <option value="<%= book.id %>" <%= selected %>>
+            <%= book.title %> — <%= book.author %>
+          </option>
+        <% end %>
+      </select>
+    </div>
+  </fieldset>
+
+  <fieldset class="form-section">
+    <legend>My Review</legend>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Rating (1-5)</label>
+        <div class="star-picker">
+          <% 1.upto(5) do |n| %>
+            <% checked = (@user_book.rating == n) ? "checked" : "" %>
+            <input
+              type="radio"
+              id="rating_<%= n %>"
+              name="query_rating"
+              value="<%= n %>"
+              <%= checked %>
+            >
+            <label for="rating_<%= n %>" class="star-label">★</label>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="date_read_field">Date Read</label>
+        <input
+          id="date_read_field"
+          type="date"
+          name="query_date_read"
+          class="form-control"
+          value="<%= @user_book.date_read %>"
+        >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="category_field">Category</label>
+      <input
+        id="category_field"
+        type="text"
+        name="query_category"
+        class="form-control"
+        placeholder="e.g. Fiction, Non-Fiction, Sci-Fi…"
+        value="<%= @user_book.category %>"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="liked_field">What I liked</label>
+      <textarea
+        id="liked_field"
+        name="query_liked_aspects"
+        class="form-control"
+        rows="3"
+        placeholder="What did you enjoy about this book?"
+      ><%= @user_book.liked_aspects %></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="disliked_field">What I disliked</label>
+      <textarea
+        id="disliked_field"
+        name="query_disliked_aspects"
+        class="form-control"
+        rows="3"
+        placeholder="Any criticisms or things you didn't enjoy?"
+      ><%= @user_book.disliked_aspects %></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="reddit_field">Reddit Discussion URL</label>
+      <input
+        id="reddit_field"
+        type="url"
+        name="query_reddit_discussion_url"
+        class="form-control"
+        placeholder="https://reddit.com/r/books/..."
+        value="<%= @user_book.reddit_discussion_url %>"
+      >
+    </div>
+
+    <div class="form-group form-group-inline">
+      <input type="hidden" name="query_is_favorite" value="0">
+      <input
+        id="favorite_field"
+        type="checkbox"
+        name="query_is_favorite"
+        value="1"
+        class="form-checkbox"
+        <%= @user_book.is_favorite ? "checked" : "" %>
+      >
+      <label for="favorite_field">Mark as favorite ♥</label>
+    </div>
+  </fieldset>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary btn-lg">
+      Save
+    </button>
+    <a href="/user_books" class="btn btn-secondary btn-lg">
+      Cancel
+    </a>
+  </div>
+</form>
