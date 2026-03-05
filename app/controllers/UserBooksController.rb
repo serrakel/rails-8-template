@@ -1,4 +1,6 @@
 class UserBooksController < ApplicationController
+  before_action(:require_user_signed_in) 
+  
   def index
     user_id = current_user.id
 

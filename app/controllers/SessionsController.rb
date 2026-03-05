@@ -1,7 +1,4 @@
 class SessionsController < ApplicationController
-  allow_unauthenticated_access({ :only => [:new, :create] })
-  rate_limit({ :to => 10, :within => 3.minutes, :only => :create, :with => -> { redirect_to("/session/new") } })
-
   def new
     render({ :template => "sessions/new" })
   end

@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # Root
+ # Root
   get("/", { :controller => "user_books", :action => "index" })
-
-  # Devise routes for users
-  devise_for(:users)
 
   # Session (login/logout)
   get("/session/new", { :controller => "sessions", :action => "new" })
