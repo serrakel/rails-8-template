@@ -1,0 +1,68 @@
+<h1>Add a new book</h1>
+
+<form action="/books" method="post" class="book-form">
+  <div class="form-group">
+    <label for="title_field">Title</label>
+    <input
+      id="title_field"
+      type="text"
+      name="query_title"
+      required
+      placeholder="Book title"
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="author_field">Author</label>
+    <input
+      id="author_field"
+      type="text"
+      name="query_author"
+      required
+      placeholder="Author name"
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="year_field">Published year</label>
+    <input
+      id="year_field"
+      type="number"
+      name="query_published_year"
+      placeholder="e.g. 2023"
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="isbn_field">ISBN</label>
+    <input
+      id="isbn_field"
+      type="text"
+      name="query_isbn"
+      placeholder="978-..."
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="cover_field">Cover image URL</label>
+    <input
+      id="cover_field"
+      type="url"
+      name="query_cover_image_url"
+      placeholder="https://..."
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="description_field">Description</label>
+    <textarea
+      id="description_field"
+      name="query_description"
+      rows="3"
+      placeholder="Brief description of the book"
+    ></textarea>
+  </div>
+
+  <button type="submit">Create book</button>
+  <a href="/user_books">Cancel</a>
+</form>

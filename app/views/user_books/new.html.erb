@@ -1,3 +1,5 @@
+<h1>Add a book to your shelf</h1>
+
 <% action_url =
      if @user_book.id == nil
        "/user_books"
@@ -6,21 +8,33 @@
      end %>
 
 <form action="<%= action_url %>" method="post" class="book-form">
-  <fieldset class="form-section">
-    <legend>Book Details</legend>
+ <fieldset class="form-section">
+  <legend>Book Details</legend>
 
-    <div class="form-group">
-      <label for="book_field">Book</label>
-      <select id="book_field" name="query_book_id" class="form-control" required>
-        <% Book.all.each do |book| %>
-          <% selected = (@user_book.book_id == book.id) ? "selected" : "" %>
-          <option value="<%= book.id %>" <%= selected %>>
-            <%= book.title %> — <%= book.author %>
-          </option>
-        <% end %>
-      </select>
-    </div>
-  </fieldset>
+  <div class="form-group">
+    <label for="title_field">Title</label>
+    <input
+      id="title_field"
+      type="text"
+      name="query_title"
+      class="form-control"
+      required
+      value="<%= @user_book.book_id ? Book.where({ :id => @user_book.book_id }).at(0)&.title : "" %>"
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="author_field">Author</label>
+    <input
+      id="author_field"
+      type="text"
+      name="query_author"
+      class="form-control"
+      required
+      value="<%= @user_book.book_id ? Book.where({ :id => @user_book.book_id }).at(0)&.author : "" %>"
+    >
+  </div>
+</fieldset>
 
   <fieldset class="form-section">
     <legend>My Review</legend>

@@ -10,10 +10,10 @@ class BooksController < ApplicationController
 
     @book.title = params.fetch("query_title")
     @book.author = params.fetch("query_author")
-    @book.description = params.fetch("query_description")
-    @book.cover_image_url = params.fetch("query_cover_image_url")
-    @book.published_year = params.fetch("query_published_year")
-    @book.isbn = params.fetch("query_isbn")
+    @book.description = params.fetch("query_description", nil)
+    @book.cover_image_url = params.fetch("query_cover_image_url", nil)
+    @book.published_year = params.fetch("query_published_year", nil)
+    @book.isbn = params.fetch("query_isbn", nil)
 
     @book.save
 

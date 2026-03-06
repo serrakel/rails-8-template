@@ -1,0 +1,30 @@
+<h1><%= @book.title %></h1>
+
+<p><strong>Author:</strong> <%= @book.author %></p>
+
+<p>
+  <strong>Published year:</strong>
+  <%= @book.published_year || "N/A" %>
+</p>
+
+<p>
+  <strong>ISBN:</strong>
+  <%= @book.isbn || "N/A" %>
+</p>
+
+<p>
+  <strong>Description:</strong><br>
+  <%= @book.description.to_s %>
+</p>
+
+<% if @book.cover_image_url.present? %>
+  <p>
+    <strong>Cover:</strong><br>
+    <img src="<%= @book.cover_image_url %>" alt="Cover for <%= @book.title %>" style="max-width:200px;">
+  </p>
+<% end %>
+
+<p>
+  <a href="/books/new">Add another book</a> |
+  <a href="/user_books">Back to my books</a>
+</p>

@@ -1,0 +1,35 @@
+<h1>My Books</h1>
+
+<p>
+  <a href="/user_books/new">+ Add a book</a>
+</p>
+
+<p>
+  Total books: <%= @total_books %><br>
+  Average rating: <%= @avg_rating || "N/A" %>
+</p>
+
+<ul>
+  <% @user_books.each do |user_book| %>
+    <% matching_books = Book.where({ :id => user_book.book_id }) %>
+    <% the_book = matching_books.at(0) %>
+
+    <li>
+      <% if the_book != nil %>
+        <strong><%= the_book.title %></strong> by <%= the_book.author %>
+      <% else %>
+        (Book missing)
+      <% end %>
+      -
+      Rating: <%= user_book.rating || "N/A" %>
+      -
+      Category: <%= user_book.category || "N/A" %>
+
+      [
+      <a href="/user_books/<%= user_book.id %>">Show</a> |
+      <a href="/user_books/<%= user_book.id %>/edit">Edit</a> |
+      <a href="/user_books/<%= user_book.id %>/destroy">Remove</a>
+      ]
+    </li>
+  <% end %>
+</ul>

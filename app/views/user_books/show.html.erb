@@ -1,0 +1,39 @@
+<% matching_books = Book.where({ :id => @user_book.book_id }) %>
+<% the_book = matching_books.at(0) %>
+
+<h1>
+  <% if the_book != nil %>
+    <%= the_book.title %> by <%= the_book.author %>
+  <% else %>
+    Book details
+  <% end %>
+</h1>
+
+<p>
+  Rating: <%= @user_book.rating || "N/A" %><br>
+  Date read: <%= @user_book.date_read || "N/A" %><br>
+  Category: <%= @user_book.category || "N/A" %><br>
+  Favorite: <%= @user_book.is_favorite ? "Yes" : "No" %><br>
+  Reddit discussion:
+  <% if @user_book.reddit_discussion_url.present? %>
+    <a href="<%= @user_book.reddit_discussion_url %>"><%= @user_book.reddit_discussion_url %></a>
+  <% else %>
+    None
+  <% end %>
+</p>
+
+<p>
+  <strong>What I liked:</strong><br>
+  <%= @user_book.liked_aspects.to_s %>
+</p>
+
+<p>
+  <strong>What I disliked:</strong><br>
+  <%= @user_book.disliked_aspects.to_s %>
+</p>
+
+<p>
+  <a href="/user_books">Back to list</a> |
+  <a href="/user_books/<%= @user_book.id %>/edit">Edit</a> |
+  <a href="/user_books/<%= @user_book.id %>/destroy">Remove</a>
+</p>

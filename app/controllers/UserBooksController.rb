@@ -1,6 +1,6 @@
 class UserBooksController < ApplicationController
-  before_action(:require_user_signed_in) 
-  
+  before_action(:require_user_signed_in)
+
   def index
     user_id = current_user.id
 
@@ -62,17 +62,22 @@ class UserBooksController < ApplicationController
   end
 
   def create
-    @user_book = UserBook.new
+    # create the Book from title/author typed into the form
+    book = Book.new
+    book.title = params.fetch("query_title")
+    book.author = params.fetch("query_author")
+    book.save
 
+    @user_book = UserBook.new
     @user_book.user_id = current_user.id
-    @user_book.book_id = params.fetch("query_book_id")
-    @user_book.rating = params.fetch("query_rating")
-    @user_book.liked_aspects = params.fetch("query_liked_aspects")
-    @user_book.disliked_aspects = params.fetch("query_disliked_aspects")
-    @user_book.date_read = params.fetch("query_date_read")
-    @user_book.is_favorite = params.fetch("query_is_favorite")
-    @user_book.reddit_discussion_url = params.fetch("query_reddit_discussion_url")
-    @user_book.category = params.fetch("query_category")
+    @user_book.book_id = book.id
+    @user_book.rating = params.fetch("query_rating", nil)
+    @user_book.liked_aspects = params.fetch("query_liked_aspects", nil)
+    @user_book.disliked_aspects = params.fetch("query_disliked_aspects", nil)
+    @user_book.date_read = params.fetch("query_date_read", nil)
+    @user_book.is_favorite = params.fetch("query_is_favorite", "0") == "1"
+    @user_book.reddit_discussion_url = params.fetch("query_reddit_discussion_url", nil)
+    @user_book.category = params.fetch("query_category", nil)
 
     @user_book.save
 
@@ -90,13 +95,14 @@ class UserBooksController < ApplicationController
     the_id = params.fetch("id")
     @user_book = UserBook.where({ :id => the_id, :user_id => current_user.id }).at(0)
 
-    @user_book.rating = params.fetch("query_rating")
-    @user_book.liked_aspects = params.fetch("query_liked_aspects")
-    @user_book.disliked_aspects = params.fetch("query_disliked_aspects")
-    @user_book.date_read = params.fetch("query_date_read")
-    @user_book.is_favorite = params.fetch("query_is_favorite")
-    @user_book.reddit_discussion_url = params.fetch("query_reddit_discussion_url")
-    @user_book.category = params.fetch("query_category")
+    # keep the same book_id; only update review fields
+    @user_book.rating = params.fetch("query_rating", nil)
+    @user_book.liked_aspects = params.fetch("query_liked_aspects", nil)
+    @user_book.disliked_aspects = params.fetch("query_disliked_aspects", nil)
+    @user_book.date_read = params.fetch("query_date_read", nil)
+    @user_book.is_favorite = params.fetch("query_is_favorite", "0") == "1"
+    @user_book.reddit_discussion_url = params.fetch("query_reddit_discussion_url", nil)
+    @user_book.category = params.fetch("query_category", nil)
 
     @user_book.save
 
